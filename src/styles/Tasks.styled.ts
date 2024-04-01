@@ -12,3 +12,13 @@ export const TaskActiviesContainer = styled.div<{ $isBlue?: boolean;}>`
   flex-direction: row;
   color: ${props => props.$isBlue ? "#8284FA" : "#1E6F9F"};
 `
+export const TaskActiviesContainerCounter = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2a2a2a;
+  height: 1.4rem;
+  width: min;
+  padding: 0.2rem;
+  border-radius: 1rem;
+`

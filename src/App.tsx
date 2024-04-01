@@ -1,36 +1,40 @@
 import Header from "./components/Header/Header"
 import { AppContainer } from "./styles/App.styled"
 import InputBar from "./components/InputBar/InputBar"
-import { TaskContainer, TaskActiviesContainer } from './styles/Tasks.styled'
+import { TaskContainer, TaskActiviesContainer, TaskActiviesContainerCounter } from './styles/Tasks.styled'
 import Task from "./components/Task/Task";
+import { useState } from "react";
+
 export default function App(){
-  const counterTask = 0;
-  const counterFinishedTask = 0
+  const [tasks, setTasks] = useState<number[]>([])
+  const [finishedTasks, setFinishedTasks] = useState<number>(0)
+
+  const handleAddTasks = (content) => [
+    setTasks([...content])
+  ]
   return (
     <AppContainer>
       <Header />
-      <InputBar />
+      <InputBar handleAddTasks={handleAddTasks}/>
 
       <TaskContainer>
         <TaskActiviesContainer>
           <p>Tarefas criadas</p>
-          <p>
-            {counterTask}
-          </p>
+          <TaskActiviesContainerCounter>
+            {tasks.length}
+          </TaskActiviesContainerCounter>
         </TaskActiviesContainer>
         <TaskActiviesContainer $isBlue>
           <p>Concluidas</p>
-          <p>
-            {counterFinishedTask}
-          </p>
+          <TaskActiviesContainerCounter>
+            {finishedTasks} de {tasks}
+          </TaskActiviesContainerCounter>
         </TaskActiviesContainer>
       </TaskContainer>
 
-      <Task />
-      <Task />
-      <Task />
-      <Task />
-      <Task />
+      {tasks.map(()=> (
+        <Task />
+      ))}
     </AppContainer>
   )
 }
