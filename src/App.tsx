@@ -3,38 +3,51 @@ import { AppContainer } from "./styles/App.styled"
 import InputBar from "./components/InputBar/InputBar"
 import { TaskContainer, TaskActiviesContainer, TaskActiviesContainerCounter } from './styles/Tasks.styled'
 import Task from "./components/Task/Task";
-import { useState } from "react";
+import { ChangeEvent, SetStateAction, useState } from "react";
 
 export default function App(){
-  const [tasks, setTasks] = useState<number[]>([])
-  const [finishedTasks, setFinishedTasks] = useState<number>(0)
 
-  const handleAddTasks = (content) => [
-    setTasks([...content])
-  ]
+  const [searchValue, setSearchValue] = useState<string>('')
+  const [tasks, setTasks] = useState([{}])
+
+  function addTask(event: ChangeEvent<HTMLInputElement>){
+    const searchText = event.target.value;
+    setSearchValue(searchText);  
+  }
+
+  function buttonAddTask(){
+     
+  }
+
   return (
     <AppContainer>
       <Header />
-      <InputBar handleAddTasks={handleAddTasks}/>
+      <InputBar ButtonAddTask={buttonAddTask} valueText={addTask}/>
 
       <TaskContainer>
         <TaskActiviesContainer>
           <p>Tarefas criadas</p>
           <TaskActiviesContainerCounter>
-            {tasks.length}
+            10
           </TaskActiviesContainerCounter>
         </TaskActiviesContainer>
         <TaskActiviesContainer $isBlue>
           <p>Concluidas</p>
           <TaskActiviesContainerCounter>
-            {finishedTasks} de {tasks}
+           1 de 10 
           </TaskActiviesContainerCounter>
         </TaskActiviesContainer>
       </TaskContainer>
 
-      {tasks.map(()=> (
-        <Task />
-      ))}
+        {tasks 
+        ? <></>
+        : tasks.map(() => {
+          return(
+            <Task key={searchValue} content={searchValue}/>
+          )
+        })
+        }
+  
     </AppContainer>
   )
 }

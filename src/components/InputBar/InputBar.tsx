@@ -1,18 +1,22 @@
-import Button from '../ButtonAdd/ButtonAdd'
+import { PlusCircle } from 'lucide-react'
+import { ButtonContainer } from '../../styles/ButtonAdd.styled'
 import { Input, InputContainer } from './InputBar.styled'
 
-export default function InputBar({handleAddTasks}){
-
+interface InputBarProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const viewContent = (event: any) => {
-    const content = event.target.value
-    console.log(content);
-  }
+  valueText : any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ButtonAddTask: any
+}
+
+export default function InputBar({valueText, ButtonAddTask}:InputBarProps){
 
   return (
     <InputContainer>
-      <Input onChange={viewContent} placeholder='Adicione uma nova tarefa'/>
-      <Button />
+      <Input onChange={valueText} placeholder='Adicione uma nova tarefa'/>
+      <ButtonContainer onClick={ButtonAddTask}>
+        <PlusCircle />
+      </ButtonContainer>
     </InputContainer>
   )
 }

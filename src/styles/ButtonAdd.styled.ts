@@ -11,4 +11,6 @@ export const ButtonContainer = styled.button`
   font-weight: bold;
   border: none;
   border-radius: 1rem;
+  text-align: center;
+  cursor: pointer;
 `
